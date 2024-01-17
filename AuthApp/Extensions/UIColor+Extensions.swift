@@ -1,5 +1,5 @@
 //
-//  UIColor+Extension.swift
+//  UIColor+Extensions.swift
 //  AuthApp
 //
 //  Created by Alex on 12.01.2024.
