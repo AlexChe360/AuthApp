@@ -15,6 +15,8 @@
 		FA7A87D82B50F6A300B076DB /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7A87D72B50F6A300B076DB /* UITextField+Extensions.swift */; };
 		FA7A87DA2B50F78E00B076DB /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7A87D92B50F78E00B076DB /* UIColor+Extensions.swift */; };
 		FA7A87DC2B50F7BC00B076DB /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7A87DB2B50F7BC00B076DB /* UIView+Extensions.swift */; };
+		FAC544542B5681D50074AAD8 /* UITapGestureRecognizer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC544532B5681D50074AAD8 /* UITapGestureRecognizer+Extensions.swift */; };
+		FAC544562B5686210074AAD8 /* NSMutableAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC544552B5686210074AAD8 /* NSMutableAttributedString+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		FA7A87D72B50F6A300B076DB /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		FA7A87D92B50F78E00B076DB /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		FA7A87DB2B50F7BC00B076DB /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		FAC544532B5681D50074AAD8 /* UITapGestureRecognizer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITapGestureRecognizer+Extensions.swift"; sourceTree = "<group>"; };
+		FAC544552B5686210074AAD8 /* NSMutableAttributedString+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +97,8 @@
 				FA7A87D72B50F6A300B076DB /* UITextField+Extensions.swift */,
 				FA7A87D92B50F78E00B076DB /* UIColor+Extensions.swift */,
 				FA7A87DB2B50F7BC00B076DB /* UIView+Extensions.swift */,
+				FAC544532B5681D50074AAD8 /* UITapGestureRecognizer+Extensions.swift */,
+				FAC544552B5686210074AAD8 /* NSMutableAttributedString+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -193,10 +199,12 @@
 			files = (
 				FA7A87DC2B50F7BC00B076DB /* UIView+Extensions.swift in Sources */,
 				FA7929392B50F32700FC94E9 /* ViewController.swift in Sources */,
+				FAC544562B5686210074AAD8 /* NSMutableAttributedString+Extensions.swift in Sources */,
 				FA7A87D82B50F6A300B076DB /* UITextField+Extensions.swift in Sources */,
 				FA7929352B50F32700FC94E9 /* AppDelegate.swift in Sources */,
 				FA7929372B50F32700FC94E9 /* SceneDelegate.swift in Sources */,
 				FA7A87DA2B50F78E00B076DB /* UIColor+Extensions.swift in Sources */,
+				FAC544542B5681D50074AAD8 /* UITapGestureRecognizer+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,6 +346,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4EE9JPLE3R;
@@ -354,6 +363,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = kz.home.AuthApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -365,6 +375,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4EE9JPLE3R;
@@ -381,6 +392,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = kz.home.AuthApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

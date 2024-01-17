@@ -9,6 +9,9 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    // MARK: - Properties
+    private let signUp = "Sign up"
+    
     // MARK: - Constants
     
     private enum Constants {
@@ -26,6 +29,7 @@ class ViewController: UIViewController {
         static let fontSize12: CGFloat = 12
         static let cornerRadius: CGFloat = 20
         static let stackSpace: CGFloat = 20
+        static let lineCornerRadius: CGFloat = 5
     }
     
     // MARK: - UI
@@ -47,8 +51,13 @@ class ViewController: UIViewController {
         textField.layer.masksToBounds = true
         textField.layer.cornerRadius = Constants.cornerRadius
         textField.placeholder = "Username"
+        textField.text = "keanureeves01"
+        textField.textColor = UIColor.lightGray
         if let image = UIImage(systemName: "person") {
             textField.setLeftView(image: image)
+        }
+        if let successImage = UIImage(named: "success_icon") {
+            textField.setRigntView(image: successImage)
         }
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
@@ -74,6 +83,7 @@ class ViewController: UIViewController {
         button.backgroundColor = UIColor.buttonColor
         button.setTitle("Login", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.3
         button.layer.shadowOffset = .zero
@@ -95,16 +105,105 @@ class ViewController: UIViewController {
         return label
     }()
     
-    lazy var connectStack: UIStackView = {
-        let stack = UIStackView()
-        stack.spacing = 20
+    lazy var separatorRightView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = Constants.lineCornerRadius
+        view.layer.masksToBounds = true
+        view.backgroundColor = UIColor.grayColor
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var separatorLeftView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = Constants.lineCornerRadius
+        view.layer.masksToBounds = true
+        view.backgroundColor = UIColor.grayColor
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var connectWithLabel: UILabel = {
+        let label = UILabel()
+        label.text = "or connect with"
+        label.font = UIFont.systemFont(ofSize: 12, weight: .medium)
+        label.textColor = UIColor.lightGray
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    
+    lazy var facebookButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setTitle("Facebook", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        button.backgroundColor = UIColor.facebookButtonColor
+        button.setImage(UIImage(named: "facebook"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
+        button.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        button.layer.shadowOpacity = 0.3
+        button.layer.shadowOffset = .zero
+        button.layer.shadowRadius = 10
+        button.layer.shouldRasterize = true
+        button.layer.rasterizationScale = UIScreen.main.scale
+        button.layer.cornerRadius = Constants.cornerRadius
+        return button
+    }()
+    
+    lazy var twitterButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setTitle("Twitter", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        button.backgroundColor = UIColor.twitterButtonColor
+        button.setImage(UIImage(named: "twitter"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
+        button.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        button.layer.shadowOpacity = 0.3
+        button.layer.shadowOffset = .zero
+        button.layer.shadowRadius = 10
+        button.layer.shouldRasterize = true
+        button.layer.rasterizationScale = UIScreen.main.scale
+        button.layer.cornerRadius = Constants.cornerRadius
+        return button
+    }()
+    
+    lazy var buttonStack: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(facebookButton)
+        stackView.addArrangedSubview(twitterButton)
+        return stackView
+    }()
+    
+    lazy var haveAccountLabel: UILabel = {
+        let label = UILabel()
+        let fullString = "Dont have account? " + signUp
+        let strNSString: NSString = fullString as NSString
+        let rangeSignUp = (strNSString as NSString).range(of: signUp)
+        let attribute = NSMutableAttributedString.init(fullString: fullString, fullStringColor: UIColor.lightGray, fullStringSize: 12, subString: signUp, subStringColor: UIColor.buttonColor, subStringSize: 12)
+        label.attributedText = attribute
         
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
+        //Tap Gesture
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(lblNumberTapped))
+        label.addGestureRecognizer(tapGesture)
+        label.isUserInteractionEnabled = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     // MARK: - Lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -124,7 +223,12 @@ class ViewController: UIViewController {
             userNameTextField,
             passwordTextField,
             loginButton,
-            forgotPasswordLabel
+            forgotPasswordLabel,
+            separatorLeftView,
+            connectWithLabel,
+            separatorRightView,
+            buttonStack,
+            haveAccountLabel
         ])
     }
     
@@ -156,11 +260,44 @@ class ViewController: UIViewController {
             forgotPasswordLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             forgotPasswordLabel.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: Constants.topAnchor),
             forgotPasswordLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.labelLeadingAnchor),
-            forgotPasswordLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.labelTralingAnchor)
+            forgotPasswordLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.labelTralingAnchor),
+            
+            separatorLeftView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.leadingAnchor),
+            separatorLeftView.trailingAnchor.constraint(equalTo: connectWithLabel.leadingAnchor, constant: 10),
+            separatorLeftView.heightAnchor.constraint(equalToConstant: 1),
+            separatorLeftView.widthAnchor.constraint(equalToConstant: 100),
+            separatorLeftView.topAnchor.constraint(equalTo: forgotPasswordLabel.bottomAnchor, constant: 208),
+            
+            connectWithLabel.topAnchor.constraint(equalTo: forgotPasswordLabel.bottomAnchor, constant: 200),
+            connectWithLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            separatorRightView.topAnchor.constraint(equalTo: forgotPasswordLabel.bottomAnchor, constant: 208),
+            separatorRightView.leadingAnchor.constraint(equalTo: connectWithLabel.trailingAnchor, constant: 10),
+            separatorRightView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.tralingAnchor),
+            separatorRightView.heightAnchor.constraint(equalToConstant: 1),
+            separatorRightView.widthAnchor.constraint(equalTo: separatorLeftView.widthAnchor),
+            
+            buttonStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            buttonStack.topAnchor.constraint(equalTo: connectWithLabel.bottomAnchor, constant: 30),
+            buttonStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.leadingAnchor),
+            buttonStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.tralingAnchor),
+            buttonStack.heightAnchor.constraint(equalToConstant: Constants.heightAnchor),
+            
+            haveAccountLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            haveAccountLabel.topAnchor.constraint(equalTo: buttonStack.bottomAnchor, constant: 30),
+            haveAccountLabel.heightAnchor.constraint(equalToConstant: 20),
         ])
     }
     
     // MARK: - Actions
+    @objc func lblNumberTapped(_ gesture: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+        let text = self.haveAccountLabel.text ?? ""
+        let recoverText = (text as NSString).range(of: signUp)
+        if gesture.didTapAttributedTextInLabel(label: haveAccountLabel, inRange: recoverText) {
+            print("Somethig do")
+        }
+    }
     
     // MARK: - Other functions
     private func setGradientBackground() {
@@ -170,9 +307,9 @@ class ViewController: UIViewController {
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
         gradientLayer.locations = [0, 1]
         gradientLayer.frame = view.bounds
-        view.layer.insertSublayer(gradientLayer, at: 0)
+        view.layer.insertSublayer(gradientLayer, at: 2)
     }
-
+    
 }
 
 
